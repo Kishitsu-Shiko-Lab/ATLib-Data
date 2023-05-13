@@ -70,6 +70,9 @@
       }
    },
    "version" : "v0.2.5",
+   "x_contributors" : [
+      "atdev01ux2 <mine_t7@hotmail.com>"
+   ],
    "x_serialization_backend" : "JSON::PP version 4.07",
    "x_static_install" : 1
 }
