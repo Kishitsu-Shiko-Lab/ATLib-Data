@@ -1,0 +1,9 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <Perl5CodeStyleSettings>
+      <option name="BRACE_STYLE_NAMESPACE" value="1" />
+      <option name="BRACE_STYLE_SUB" value="1" />
+      <option name="BRACE_STYLE_COMPOUND" value="1" />
+    </Perl5CodeStyleSettings>
+  </code_scheme>
+</component>
