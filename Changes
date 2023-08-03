@@ -2,6 +2,12 @@ Revision history for Perl extension ATLib-Data
 
 {{$NEXT}}
 
+v0.3.1 2023-08-03T22:15:56Z
+
+    - ATLib::Data::Column 基本クラスの変更によりコンストラクタでの$type_nameの指定を削除
+    - ATLib::Data::Table 基本クラスの変更によりコンストラクタでの$type_nameの指定を削除
+    - ATLib::Data 基本クラスの変更による全般的なユニットテストケースの追加
+
 v0.2.5 2023-05-13T01:57:53Z
 
     - original version

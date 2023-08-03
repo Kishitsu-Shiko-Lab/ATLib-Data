@@ -1,10 +1,10 @@
 # 名前
 
-ATLib::Data - ATLib 共通型システムの [Mouse](https://metacpan.org/pod/Mouse) による実装
+ATLib::Data - ATLib 標準型システムの [Mouse](https://metacpan.org/pod/Mouse) による実装
 
 # バージョン
 
-この文書は ATLib::Data version v0.2.5 について説明しています。
+この文書は ATLib::Data version v0.3.1 について説明しています。
 
 # 概要
 
@@ -13,8 +13,6 @@ ATLib::Data - ATLib 共通型システムの [Mouse](https://metacpan.org/pod/Mo
 # 説明
 
 ATLib::Data は、Perlでのマトリクス構造を扱う開発に.NET Frameworkのような共通型を [Mouse](https://metacpan.org/pod/Mouse) による実装で導入します。
-標準型は.NET Framework (C#) での開発経験からエンタープライズ開発で便利と考えられるものを、
-Perlの型に合わせて作成しております。
 
 # インターフェース
 

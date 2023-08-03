@@ -41,6 +41,7 @@ sub items
 sub BUILDARGS
 {
     my ($class, $args_ref) = @_;
+    $class->SUPER::BUILDARGS($args_ref);
 
     if (!exists $args_ref->{_columns})
     {
@@ -152,7 +153,7 @@ ATLib::Data::Columns - L<< ATLib::Data::Column >> オブジェクトのコレク
 
 =head1 バージョン
 
-この文書は ATLib::Data 0.2.5 について説明しています。
+この文書は ATLib::Data 0.3.1 について説明しています。
 
 =head1 概要
 

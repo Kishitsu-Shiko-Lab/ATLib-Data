@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use Test::More tests => 23;
+use Test::More tests => 24;
 
 use ATLib::Std::Int;
 use ATLib::Std::String;
@@ -19,85 +19,88 @@ my $instance = $table->columns;
 isa_ok($instance, $class);
 
 #3
-is($instance->count, 0);
+is($instance->type_name, $class);
 
 #4
+is($instance->count, 0);
+
+#5
 my $column1_name = q{Column1};
 my $column1 = ATLib::Data::Column->create($column1_name, q{ATLib::Std::Int});
 $instance->add($column1);
 is($instance->count, 1);
 
-#5
+#6
 my $column2_name = q{Column2};
 my $column2 = ATLib::Data::Column->create($column2_name, q{ATLib::Std::String});
 $instance->add($column2);
 is($instance->count, 2);
 
-#6
+#7
 my $column = $instance->items(0);
 isa_ok($column, q{ATLib::Data::Column});
 
-#7
+#8
 is($column->column_name->equals($column1_name), 1);
 
-#8
+#9
 $column = $instance->items(1);
 is($column->column_name->equals($column2_name), 1);
 
-#9
+#10
 $column = $instance->items(ATLib::Std::Int->from(1));
 is($column->column_name->equals($column2_name), 1);
 
-#10
+#11
 $column = $instance->items($column1_name);
 is($column->column_name->equals($column1_name), 1);
 
-#11
+#12
 $column = $instance->items(ATLib::Std::String->from($column1_name));
 is($column->column_name->equals($column1_name), 1);
 
-#12
+#13
 $instance = $instance->remove($instance->items(0));
 isa_ok($instance, $class);
 
-#13
+#14
 is($instance->count, 1);
 
-#14
+#15
 $column = $instance->items(0);
 is($column->column_name->equals($column2_name), 1);
 
-#15
+#16
 $instance = $instance->clear();
 isa_ok($instance, $class);
 
-#16
+#17
 is($instance->count, 0);
 
-#17
+#18
 $instance = $instance->add($column1);
 $instance = $instance->add($column2);
 is($instance->count, 2);
 
-#18
+#19
 $instance = $instance->remove_at(0);
 is($instance->count, 1);
 
-#19
+#20
 is($instance->items(0)->column_name, $column2_name);
 
-#20
+#21
 $instance = $instance->add($column1);
 is($instance->count, 2);
 
-#21
+#22
 $instance = $instance->remove($column1_name);
 is($instance->count, 1);
 
-#22
+#23
 is($instance->items(0)->column_name, $column2_name);
 
-#23
+#24
 $instance = $instance->remove($column2);
 is($instance->count, 0);
 

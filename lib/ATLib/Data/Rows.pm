@@ -65,7 +65,7 @@ ATLib::Data::Rows - L<< ATLib::Data::Table >>内の行のコレクション
 
 =head1 バージョン
 
-この文書は ATLib::Data 0.2.5 について説明しています。
+この文書は ATLib::Data 0.3.1 について説明しています。
 
 =head1 概要
 
