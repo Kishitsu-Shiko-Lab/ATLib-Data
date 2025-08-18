@@ -38,6 +38,14 @@ sub table_name
     return $self->_table_name;
 }
 
+# Builder
+sub BUILDARGS
+{
+    my ($class, $args_ref) = @_;
+    $class->SUPER::BUILDARGS($args_ref);
+    return $args_ref;
+}
+
 # Class Methods
 sub create
 {
@@ -71,6 +79,7 @@ sub create
         rows        => $rows
     });
     $instance->columns->_set__table($instance);
+    $instance->rows->_set__table($instance);
     return $instance;
 }
 
@@ -93,30 +102,28 @@ ATLib::Data::Table - マトリクス構造を表す型
 
 =head1 バージョン
 
-この文書は ATLib::Data version v0.3.1 について説明しています。
+この文書は ATLib::Data version v0.4.0 について説明しています。
 
 =head1 概要
 
-    use ATLib::Data::Table;
-    use ATLib::Data::Column;
-    use ATLib::Data::Row;
+    use ATLib::Data;
 
     my $table = ATLib::Data::Table->create();
     $table-columns->add(ATLib::Data::Column->create('column1', 'ATLib::Std::Int'));
     $table-columns->add(ATLib::Data::Column->create('column2', 'ATLib::Std::String'));
 
     my $row = $table->create_new_row();
-    $row->items('column1', 1);
-    $row->items('column2', 'Row data (1)');
+    $row->item('column1', 1);
+    $row->item('column2', 'Row data (1)');
     $table->rows->add($row);
 
-    my $column1_value = $table->rows->items(0)->items(0);
+    my $column1_value = $table->rows->item(0)->item(0);
     # or
-    my $column1_value = $table->rows->items(0)->items('column1');
+    my $column1_value = $table->rows->item(0)->item('column1');
 
-    $table->rows->items(0)->items(0, 2);
+    $table->rows->item(0)->item(0, 2);
     # or
-    $table->rows->items(0)->items('column1', 2);
+    $table->rows->item(0)->item('column1', 2);
 
 =head1 基底クラス
 
@@ -154,7 +161,7 @@ atdev01 E<lt>mine_t7 at hotmail.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2020-2023 atdev01.
+Copyright (C) 2020-2025 atdev01.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms of the Artistic License 2.0. For details,

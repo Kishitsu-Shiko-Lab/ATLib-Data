@@ -3,13 +3,20 @@ use Mouse;
 extends 'ATLib::Std::Any';
 
 use ATLib::Utils qw{ as_type_of };
-use ATLib::Std::String;
-use ATLib::Std::Exception::Argument;
+use ATLib::Std;
 
 # Attributes
 has 'column_name' => (is => 'ro', isa => 'ATLib::Std::String', required => 1);
 has 'data_type'   => (is => 'ro', isa => 'ATLib::Std::String', required => 1);
 has 'table'       => (is => 'ro', isa => 'ATLib::Data::Table', required => 0, writer => '_set_table');
+
+# Builder
+sub BUILDARGS
+{
+    my ($class, $args_ref) = @_;
+    $class->SUPER::BUILDARGS($args_ref);
+    return $args_ref;
+}
 
 # Class Methods
 sub create
@@ -69,12 +76,12 @@ ATLib::Data::Column - L<< ATLib::Data::Table >>マトリクス構造の列を定
 
 =head1 バージョン
 
-この文書は ATLib::Data version v0.3.1 について説明しています。
+この文書は ATLib::Data version v0.4.0 について説明しています。
 
 =head1 概要
 
-    use ATLib::Std::String;
-    use ATLib::Data::Column;
+    use ATLib::Std;
+    use ATLib::Data;
 
     my $column = ATLib::Data::Column->create('column_name', 'ATLib::Std::String');
 
@@ -155,7 +162,7 @@ atdev01 E<lt>mine_t7 at hotmail.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2020-2023 atdev01.
+Copyright (C) 2020-2025 atdev01.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms of the Artistic License 2.0. For details,

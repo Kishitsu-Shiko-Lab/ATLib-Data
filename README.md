@@ -4,7 +4,7 @@ ATLib::Data - ATLib 標準型システムの [Mouse](https://metacpan.org/pod/Mo
 
 # バージョン
 
-この文書は ATLib::Data version v0.3.1 について説明しています。
+この文書は ATLib::Data version v0.4.0 について説明しています。
 
 # 概要
 
@@ -46,13 +46,17 @@ ATLib::Data は、Perlでのマトリクス構造を扱う開発に.NET Framewor
     $cpanm https://github.com/Kishitsu-Shiko-Lab/ATLib-Std.git
     $cpanm https://github.com/Kishitsu-Shiko-Lab/ATLib-Data.git
 
+    Or
+
+    $cpm https://github.com/Kishitsu-Shiko-Lab/ATLib-Data.git
+
 # AUTHOR
 
 atdev01 &lt;mine\_t7 at hotmail.com>
 
 # COPYRIGHT AND LICENSE
 
-Copyright (C) 2020-2023 atdev01.
+Copyright (C) 2020-2025 atdev01.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms of the Artistic License 2.0. For details,

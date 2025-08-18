@@ -19,14 +19,14 @@ sub count
     return $self->SUPER::count;
 }
 
-sub items
+sub item
 {
     my $self = shift;
     my $index_or_name = shift;
 
     if (is_int($index_or_name) || as_type_of('ATLib::Std::Int', $index_or_name))
     {
-        return $self->_columns->items(ATLib::Std::Int->value($index_or_name));
+        return $self->_columns->item(ATLib::Std::Int->value($index_or_name));
     }
 
     if (as_type_of('Str', $index_or_name))
@@ -34,7 +34,7 @@ sub items
         $index_or_name = ATLib::Std::String->from($index_or_name);
     }
 
-    return $self->SUPER::items($index_or_name);
+    return $self->SUPER::item($index_or_name);
 }
 
 # Builder
@@ -83,7 +83,7 @@ sub add
 
     $self->_columns->add($column);
     $self->SUPER::add($column->column_name, $column);
-    $self->items($column->column_name)->_set_table($self->_table);
+    $self->item($column->column_name)->_set_table($self->_table);
     return $self;
 }
 
@@ -104,7 +104,7 @@ sub remove_at
         })->throw();
     }
 
-    my $column_name = $self->items($index)->column_name;
+    my $column_name = $self->item($index)->column_name;
     $self->_columns->remove_at($index);
     $self->SUPER::remove($column_name);
     return $self;
@@ -125,7 +125,7 @@ sub remove
     else
     {
         $column_name = $column_or_name;
-        $column = $self->items($column_name);
+        $column = $self->item($column_name);
     }
 
     if (!$self->contains($column_name))
@@ -153,13 +153,11 @@ ATLib::Data::Columns - L<< ATLib::Data::Column >> オブジェクトのコレク
 
 =head1 バージョン
 
-この文書は ATLib::Data 0.3.1 について説明しています。
+この文書は ATLib::Data 0.4.0 について説明しています。
 
 =head1 概要
 
-    use ATLib::Data::Table;
-    use ATLib::Data::Column;
-    use ATLib::Data::Row;
+    use ATLib::Data;
 
     my $table = ATLib::Data::Table->create();
     $table-columns->add(ATLib::Data::Column->create('column1', 'ATLib::Std::Int'));
@@ -180,7 +178,7 @@ ATLib::Data::Columnsは、L<< ATLib::Data::Column >>オブジェクトのコレ�
 
 定義されている列数を取得します。
 
-=head2 C<< $column = $instance->items($index_or_name) >> -E<gt> L<< ATLib::Data::Column >>
+=head2 C<< $column = $instance->item($index_or_name) >> -E<gt> L<< ATLib::Data::Column >>
 
 $index_or_nameで指定した索引、または列名の列定義を列定義コレクションから取得します。
 
@@ -205,5 +203,17 @@ $index_or_nameで指定した索引、または列名の列定義を列定義コ
 
 指定した列定義オブジェクト、または列名の列定義オブジェクトをコレクションから削除します。
 また、操作結果のインスタンスを返します。
+
+=head1 AUTHOR
+
+atdev01 E<lt>mine_t7 at hotmail.comE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2020-2025 atdev01.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms of the Artistic License 2.0. For details,
+see the full text of the license in the file LICENSE.
 
 =cut

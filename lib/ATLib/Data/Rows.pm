@@ -3,12 +3,12 @@ use Mouse;
 extends 'ATLib::Std::Collections::List';
 
 use ATLib::Utils qw{ is_int as_type_of };
-use ATLib::Std::Int;
-use ATLib::Std::String;
-use ATLib::Std::Exception::Argument;
+use ATLib::Std;
 
 # Attributes
-sub items
+has '_table' => (is => 'ro', isa => 'ATLib::Data::Table', required => 0, writer => '_set__table');
+
+sub item
 {
     my $self = shift;
     my $index = shift;
@@ -24,7 +24,15 @@ sub items
             param_name => ATLib::Std::String->from(q{$index}),
         })->throw();
     }
-    return $self->SUPER::items($index);
+    return $self->SUPER::item($index);
+}
+
+# Builder
+sub BUILDARGS
+{
+    my ($class, $args_ref) = @_;
+    $class->SUPER::BUILDARGS($args_ref);
+    return $args_ref;
 }
 
 # Class Methods
@@ -35,6 +43,32 @@ sub _create
 }
 
 # Instance Methods
+sub add
+{
+    my $self = shift;
+    my $row = shift;
+
+    if ($row->table ne $self->_table)
+    {
+        ATLib::Std::Exception::Argument->new({
+            message    => q{This row belongs to other table.},
+            param_name => q{$row},
+        })->throw();
+    }
+
+    if ($self->contains($row))
+    {
+        ATLib::Std::Exception::Argument->new({
+            message    => q{This row already belongs to this table.},
+            param_name => q{$row},
+        })->throw();
+    }
+
+    $self->SUPER::add($row);
+
+    return $self;
+}
+
 sub remove_at
 {
     my $self = shift;
@@ -65,21 +99,19 @@ ATLib::Data::Rows - L<< ATLib::Data::Table >>内の行のコレクション
 
 =head1 バージョン
 
-この文書は ATLib::Data 0.3.1 について説明しています。
+この文書は ATLib::Data 0.4.0 について説明しています。
 
 =head1 概要
 
-    use ATLib::Data::Table;
-    use ATLib::Data::Column;
-    use ATLib::Data::Row;
+    use ATLib::Data;
 
     my $table = ATLib::Data::Table->create();
     $table-columns->add(ATLib::Data::Column->create('column1', 'ATLib::Std::Int'));
     $table-columns->add(ATLib::Data::Column->create('column2', 'ATLib::Std::String'));
 
     my $row = $table->create_new_row();
-    $row->items('column1', 1);
-    $row->items('column2', 'Row data (1)');
+    $row->item('column1', 1);
+    $row->item('column2', 'Row data (1)');
     $table->rows->add($row);
 
 =head1 基底クラス
@@ -97,7 +129,7 @@ ATLib::Data::Rowsは、L<< ATLib::Data::Table >>に格納されている行L<< A
 
 本インスタンスに格納されている L<< ATLib::Data::Row >>の行数を取得します。
 
-=head2 C<< $row = $instance->items($index); >> -E<gt> L<< ATLib::Data::Row >>
+=head2 C<< $row = $instance->item($index); >> -E<gt> L<< ATLib::Data::Row >>
 
 $indexの位置にある L<< ATLib::Data::Row >> を取得します。
 
@@ -123,5 +155,16 @@ $indexの位置にある L<< ATLib::Data::Row >> を取得します。
 行のコレクションから$rowで指定したL<< ATLib::Data::Row >>を削除します。
 また、操作結果のインスタンスを返します。
 
+=head1 AUTHOR
+
+atdev01 E<lt>mine_t7 at hotmail.comE<gt>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2020-2025 atdev01.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms of the Artistic License 2.0. For details,
+see the full text of the license in the file LICENSE.
 
 =cut

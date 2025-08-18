@@ -1,8 +1,17 @@
 package ATLib::Data;
 use 5.016_001;
-use version; our $VERSION = version->declare('v0.3.1');
+use version; our $VERSION = version->declare('v0.4.0');
 use strict;
 use warnings;
+
+sub import
+{
+    use ATLib::Data::Column;
+    use ATLib::Data::Columns;
+    use ATLib::Data::Table;
+    use ATLib::Data::Row;
+    use ATLib::Data::Rows;
+}
 
 1;
 __END__
@@ -15,7 +24,7 @@ ATLib::Data - ATLib 標準型システムの L<< Mouse >> による実装
 
 =head1 バージョン
 
-この文書は ATLib::Data version v0.3.1 について説明しています。
+この文書は ATLib::Data version v0.4.0 について説明しています。
 
 =head1 概要
 
@@ -57,13 +66,17 @@ L<< ATLib::Data::Table >>のプロパティからアクセスします。
     $cpanm https://github.com/Kishitsu-Shiko-Lab/ATLib-Std.git
     $cpanm https://github.com/Kishitsu-Shiko-Lab/ATLib-Data.git
 
+    Or
+
+    $cpm https://github.com/Kishitsu-Shiko-Lab/ATLib-Data.git
+
 =head1 AUTHOR
 
 atdev01 E<lt>mine_t7 at hotmail.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2020-2023 atdev01.
+Copyright (C) 2020-2025 atdev01.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms of the Artistic License 2.0. For details,

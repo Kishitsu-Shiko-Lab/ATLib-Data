@@ -37,38 +37,38 @@ $instance->add($column2);
 is($instance->count, 2);
 
 #7
-my $column = $instance->items(0);
+my $column = $instance->item(0);
 isa_ok($column, q{ATLib::Data::Column});
 
 #8
-is($column->column_name->equals($column1_name), 1);
+ok($column->column_name->equals($column1_name));
 
 #9
-$column = $instance->items(1);
-is($column->column_name->equals($column2_name), 1);
+$column = $instance->item(1);
+ok($column->column_name->equals($column2_name));
 
 #10
-$column = $instance->items(ATLib::Std::Int->from(1));
-is($column->column_name->equals($column2_name), 1);
+$column = $instance->item(ATLib::Std::Int->from(1));
+ok($column->column_name->equals($column2_name));
 
 #11
-$column = $instance->items($column1_name);
-is($column->column_name->equals($column1_name), 1);
+$column = $instance->item($column1_name);
+ok($column->column_name->equals($column1_name));
 
 #12
-$column = $instance->items(ATLib::Std::String->from($column1_name));
-is($column->column_name->equals($column1_name), 1);
+$column = $instance->item(ATLib::Std::String->from($column1_name));
+ok($column->column_name->equals($column1_name));
 
 #13
-$instance = $instance->remove($instance->items(0));
+$instance = $instance->remove($instance->item(0));
 isa_ok($instance, $class);
 
 #14
 is($instance->count, 1);
 
 #15
-$column = $instance->items(0);
-is($column->column_name->equals($column2_name), 1);
+$column = $instance->item(0);
+ok($column->column_name->equals($column2_name));
 
 #16
 $instance = $instance->clear();
@@ -87,7 +87,7 @@ $instance = $instance->remove_at(0);
 is($instance->count, 1);
 
 #20
-is($instance->items(0)->column_name, $column2_name);
+is($instance->item(0)->column_name, $column2_name);
 
 #21
 $instance = $instance->add($column1);
@@ -98,7 +98,7 @@ $instance = $instance->remove($column1_name);
 is($instance->count, 1);
 
 #23
-is($instance->items(0)->column_name, $column2_name);
+is($instance->item(0)->column_name, $column2_name);
 
 #24
 $instance = $instance->remove($column2);
