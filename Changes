@@ -2,6 +2,10 @@ Revision history for Perl extension ATLib-Data
 
 {{$NEXT}}
 
+v0.4.1 2025-08-19T14:52:35Z
+
+    - 管理上の軽微な修正
+
 v0.4.0 2025-08-18T22:25:15Z
 
     - ATLib::Std::Boolの追加によるATLib::Data::Column->create()の内部処理を修正
