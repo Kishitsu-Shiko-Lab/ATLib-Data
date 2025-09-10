@@ -9,11 +9,42 @@ use ATLib::Std;
 has 'column_name' => (is => 'ro', isa => 'ATLib::Std::String', required => 1);
 has 'data_type'   => (is => 'ro', isa => 'ATLib::Std::String', required => 1);
 has 'table'       => (is => 'ro', isa => 'ATLib::Data::Table', required => 0, writer => '_set_table');
+has '_caption'     => (is => 'ro', isa => 'ATLib::Std::Maybe', required => 0);
+
+sub caption
+{
+    my $self = shift;
+
+    if (scalar(@_) == 1)
+    {
+        my $value = shift;
+        if (!defined $value)
+        {
+            $self->_caption->value(undef);
+        }
+        else
+        {
+            if (!as_type_of('ATLib::Std::String', $value))
+            {
+                $value = ATLib::Std::String->from($value);
+            }
+            $self->_caption->value($value);
+        }
+        return;
+    }
+
+    return $self->_caption->value if ($self->_caption->has_value);
+    return $self->column_name;
+}
 
 # Builder
 sub BUILDARGS
 {
     my ($class, $args_ref) = @_;
+    if (!exists $args_ref->{_caption})
+    {
+        $args_ref->{_caption} = ATLib::Std::Maybe->of('ATLib::Std::String', undef);
+    }
     $class->SUPER::BUILDARGS($args_ref);
     return $args_ref;
 }
@@ -76,7 +107,7 @@ ATLib::Data::Column - L<< ATLib::Data::Table >>マトリクス構造の列を定
 
 =head1 バージョン
 
-この文書は ATLib::Data version v0.4.0 について説明しています。
+この文書は ATLib::Data version v0.4.2 について説明しています。
 
 =head1 概要
 
@@ -121,6 +152,11 @@ L<< ATLib::Std::DateTime >>
 =back
 
 =head1 プロパティ
+
+=head2 C<< $caption = $instance->caption; >> -E<gt> L<< ATLib::Std::String >>
+
+列のキャプションを設定、または取得します。
+キャプションが設定されていない場合は、C<< $instance->column_name >> を返します。
 
 =head2 C<< $column_name = $instance->column_name; >> -E<gt> L<< ATLib::Std::String >>
 

@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use Test::More tests => 10;
+use Test::More tests => 12;
 
 use ATLib::Std;
 
@@ -46,6 +46,15 @@ ok($instance->data_type->equals($data_type_str));
 
 #10
 is($instance->equals($instance), 1);
+
+#11
+is($instance->caption, $column_name_str);
+
+#12
+my $caption_bare = "column_caption_bare";
+my $caption_str = ATLib::Std::String->from($caption_bare);
+$instance->caption($caption_bare);
+is($instance->caption, $caption_str);
 
 done_testing();
 __END__

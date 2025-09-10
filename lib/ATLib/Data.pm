@@ -1,6 +1,6 @@
 package ATLib::Data;
 use 5.016_001;
-use version; our $VERSION = version->declare('v0.4.1');
+use version; our $VERSION = version->declare('v0.4.2');
 use strict;
 use warnings;
 
